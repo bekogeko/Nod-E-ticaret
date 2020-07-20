@@ -1,0 +1,32 @@
+<html>
+    <head>
+        <title>Login Page</title>
+    </head>
+    <body>
+        
+
+        <%if(user) {%>
+            
+            <h1>ne ara kayit oldun aq</h1>
+
+        <%} else { %>
+
+            <h1>LoginForm</h1>
+            
+            <%if(messages.error){%>
+                <%=messages.error%>    
+            <%}%>
+
+            <form method="POST" action="/login">
+                <input type="email" name="username" placeholder="E-Posta Adresi"><br>
+                <br>
+                <input type="password" name="password" placeholder="Çok Havalı Şifre"><br>
+                <hr>
+                <input type="submit" value="Giris Yap">
+            </form>
+
+        <%}%>
+
+    </body>
+
+</html>

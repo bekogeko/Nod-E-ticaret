@@ -1,0 +1,35 @@
+<html>
+    <head>
+        <script src="/js/register.js"></script>
+    
+
+    </head>
+    <body>
+        <%if(user) {%>
+            <h1>ne ara kayit oldun aq</h1>
+        <%} else {%>
+            <h1>Register Form</h1>
+            <form method="POST" action="/register">
+                <label for="name">İsim, Soyisim</label>
+                <input type="text" name="name" ><br>
+                <label for="email">E-Posta Adresi</label>
+                <input type="email" name="email"  ><br>
+                <label for="password">Çok Havalı Şifre </label>
+                <input type="password" minlength="0" onchange="passWordLimitation()" id='password' name="password"><br>
+                <label for="passwordRepeat">Çok Havalı Şifre v2</label>
+                <input type="password" minlength="0" name="passwordRepeat"><br>
+                <input type="submit" value="abicim gunun sozunu soyler misiiiinn">
+            </form>
+            <h1 style="visibility:visible; color: red;">Hatalar</h1>
+            <p id='errors' style="visibility: visible;"></p>
+        <%}%>
+        <%if (hata==1) {%>
+            <h3>Şifreler Eşleşmiyor.</h3>
+        <%} else if (hata==2){%>
+            <h3>SEN ZATEN VARSIN BROM.</h3>
+        <%}%>
+        <%if (succes==true) {%>
+            <h3>BAŞARILI AMK.</h3>
+        <%}%>
+    </body>
+</html>

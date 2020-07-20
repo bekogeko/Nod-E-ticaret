@@ -1,0 +1,20 @@
+<html>
+    <head>
+
+    </head>
+    <body>
+        
+        <%if(typeof(user) !=='undefined' ){ //Kullanici varsa%>
+            <%=user.fullname%>
+            <a href="./logout"></a>
+            <%if(isAdmin){%>
+                <a href="./admin/dashboard">Admin Panel</a>
+            <%}%>
+        <%}else{%>
+        <a href="./login">Login</a>
+        <a href="./register">Register</a>
+        <%}%>
+
+
+    </body>
+</html>

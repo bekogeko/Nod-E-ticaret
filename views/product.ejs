@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>adasan</title>
+    <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="assets/css/styles.min.css">
+</head>
+
+<body>
+    <nav class="navbar navbar-light navbar-expand-md navigation-clean-button sticky-top">
+        <div class="container"><a class="navbar-brand" href="#">Adasan Outdoor</a><button data-toggle="collapse" class="navbar-toggler" data-target="#navcol-1"><span class="sr-only">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
+            <div class="collapse navbar-collapse"
+                id="navcol-1">
+                <ul class="nav navbar-nav ml-auto">
+                    <li class="nav-item" role="presentation" style="margin-right: 5px;margin-left: 5px;"><a class="nav-link active" href="#">Ana Sayfa</a></li>
+                    <li class="nav-item" role="presentation" style="margin-right: 5px;margin-left: 5px;"><a class="nav-link" href="#">Yaaz</a></li>
+                    <li class="nav-item" role="presentation" style="margin-right: 5px;margin-left: 5px;"><a class="nav-link" href="#">Tüm Ürünler</a></li>
+                    <li class="nav-item" role="presentation" style="margin-right: 5px;margin-left: 5px;"><a class="nav-link btn btn-outline-secondary" href="#" role="button">Giriş Yap</a></li>
+                    <li class="nav-item" role="presentation" style="margin-right: 5px;margin-left: 5px;"><a class="nav-link btn btn-outline-secondary" href="#" role="button">Kayıt Ol</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <section>
+        <div class="container" style="margin-top: 20px;margin-bottom: 20px;"><img class="img-fluid border rounded" src="<%= urun.imgSrc %>">
+            <h1 style="margin-bottom: 26px;"><%= urun.isim %></h1>
+            <div class="row">
+                <div class="col text-center">
+                <% urun.renkler.forEach(renk=>{%>
+                    <button class="btn btn-dark" type="button" style="margin-right: 10px;margin-left: 10px;background-color: <%= renk.hex %>;"><%= renk.isim %></button>
+                <%})%>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section style="background-color: #3b3b3b;color: rgb(255,255,255);">
+        <div class="container" style="color: rgb(255,255,255);">
+            <div class="row">
+                <div class="col text-center" style="color: rgb(255,255,255);">
+                    <h3 style="margin-top: 26px;">Linkler</h3>
+                    <ul class="list-unstyled">
+                        <li>Item 1</li>
+                        <li>Item 2</li>
+                        <li>Item 3</li>
+                        <li>Item 4</li>
+                    </ul>
+                </div>
+                <div class="col text-center">
+                    <h3 style="margin-top: 26px;">Diğer Linkler</h3>
+                    <ul class="list-unstyled">
+                        <li>Item 1</li>
+                        <li>Item 2</li>
+                        <li>Item 3</li>
+                        <li>Item 4</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <p class="text-center" style="margin-top: 11px;">Adasan Outdoor - 2020©&nbsp;- Tüm hakları saklıdır.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    <script src="assets/js/jquery.min.js"></script>
+    <script src="assets/bootstrap/js/bootstrap.min.js"></script>
+</body>
+
+</html>
