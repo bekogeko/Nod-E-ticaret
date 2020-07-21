@@ -40,13 +40,13 @@ function ReqUser() {
                     <tr>`
                 );
 
-                $('#reqUserTableShowInfo').html(
-                    `
-                    Showing <b>`+ result.docs.length + `</b> out of <b>` + result.AlldocCount + `</b> entries
-                    `
-                )
+               
 
-            }
+            } $('#reqUserTableShowInfo').html(
+                `
+                Showing <b>`+ result.docs.length + `</b> out of <b>` + result.AlldocCount + `</b> entries
+                `
+            )
 
         }
     });
@@ -90,20 +90,28 @@ function editData(dataIndex) {
 
     showModal('editDataModal' + (parseInt(dataIndex) + 1), 'editDataModal' + dataIndex, 'modal-lg', '#' + (parseInt(dataIndex) + 1) + '\'s Details',
         `
-        <form id='edit' novalidate>
+        <form id='editForm' class="was-validated" novalidate>
             <div class="form-row" style="margin-bottom: 15px;">
                 <div class="col">
                     <label for="editUserfullname">Full Name</label>
-                    <input type="text" id="editUserfullname" class="form-control" placeholder="Full Name" value="`+data.fullname+`">
-                </div>
-                <div class="col">
-                    <label for="editUserEmail">Email</label>
-                    <input type="text" id="editUserEmail"class="form-control" placeholder="E-Mail" value="`+data.email+`">
+                    <input type="text" id="editUserfullname" class="form-control" placeholder="Full Name"  required value="`+ data.fullname + `">
+
                     <div class="valid-feedback">
                         Sorun Yok!
                     </div>
                     <div class="invalid-feedback">
-                        Lutfen gecerli bir E-Posta girin
+                        Lutfen Gecerli bir kullanici adi girin
+                    </div>
+                </div>
+                <div class="col">
+                    <label for="editUserEmail">Email</label>
+                    <input type="email" id="editUserEmail"class="form-control" placeholder="E-Mail" value="`+ data.email + `">
+                    
+                    <div class="valid-feedback">
+                        Sorun Yok!
+                    </div>
+                    <div class="invalid-feedback">
+                        Lutfen Gecerli bir E-Mail girin
                     </div>
                 </div>
             </div>
@@ -111,79 +119,201 @@ function editData(dataIndex) {
             <div class="form-row" style="margin-bottom: 15px;">
                 <div class="col">
                     <label >Password</label>
-                    <input id="editUserPassword" type="text" class="form-control" placeholder="Password" >
+                    <input id="editUserPassword" type="text" class="form-control" placeholder="Password" onkeyup="equalityPassKeyUp()" >
                     <small class="form-text text-muted">Değiştirmek istemiyorsanız boş bırakın</small>
+                    
                 </div>
                 <div class="col">
                     <label >Password Repeat</label>
-                    <input id="editUserPasswordRepeat" type="text" class="form-control" placeholder="Password Repeat" >
+                    <input id="editUserPasswordRepeat" type="text" class="form-control" placeholder="Password Repeat" onkeyup="equalityPassKeyUp()"  >
+                    <div class="valid-feedback">
+                        Sorun Yok!
+                    </div>
+                    <div class="invalid-feedback">
+                        Lutfen sifreyi dogrulayin
+                    </div>
                 </div>
             </div>
         </form>
-        `,  `
-                <button class="btn btn-success" onclick="editRequest(`+dataIndex+`)">Kaydet</button>
-                <button class=btn btn-warning" onclick="verifyRequest(`+dataIndex+`)">Dogrula</button>
+        `, `
+                <button class="btn btn-success" onclick="editRequest(`+ dataIndex + `)">Kaydet</button>
+                <button class=btn btn-warning" onclick="verifyRequest(`+ dataIndex + `)">Dogrula</button>
 
             `)
 }
 
+function equalityPassKeyUp() {
+
+    console.log("called")
+    var pass = document.getElementById('editUserPassword').value
+    var passRepeat = document.getElementById('editUserPasswordRepeat').value
+    
+    
+    
+    if(pass.includes(' ')){
+        document.getElementById('editUserPassword').setCustomValidity("Can't include space/tab ")
+        document.getElementById('editUserPasswordRepeat').setCustomValidity("Can't include space/tab ")
+
+        return;
+    }
+    if(passRepeat.includes(' ')){
+        document.getElementById('editUserPasswordRepeat').setCustomValidity("Can't include space/tab ")
+        document.getElementById('editUserPassword').setCustomValidity("Can't include space/tab ")
+
+        return;
+    }    
+
+    if(pass === passRepeat){
+        //limitation
+        document.getElementById('editUserPasswordRepeat').setCustomValidity('')
+        document.getElementById('editUserPassword').setCustomValidity('')
+        return;
+    }else{
+        document.getElementById('editUserPasswordRepeat').setCustomValidity("Can't be different")
+        document.getElementById('editUserPassword').setCustomValidity("Can't be different")
+
+        return;
+    }
+
+    
+
+}
+
 
 function editRequest(dataIndex) {
-    
-    //editForm = document.getElementById(dataID)
-    userEmailForm = document.getElementById('editUserEmail').value
-    userFullName = document.getElementById('editUserfullname').value
-    userPassword = document.getElementById('editUserPassword').value
-    userPasswordRepeat = document.getElementById('editUserPasswordRepeat').value
-    
+
+    userEmailForm = document.getElementById('editUserEmail')
+    userFullName = document.getElementById('editUserfullname')
+    userPassword = document.getElementById('editUserPassword')
+    userPasswordRepeat = document.getElementById('editUserPasswordRepeat')
+
+
+    if(!(userEmailForm.checkValidity()&&
+       userFullName.checkValidity()&&
+       userPassword.checkValidity()&&
+       userPasswordRepeat.checkValidity()) ){
+           
+        userEmailForm.reportValidity()
+        userFullName.reportValidity()
+        userPassword.reportValidity()
+        userPasswordRepeat.reportValidity()
+        return;
+    }
+
+
     datauser = requserResult.docs[dataIndex]
- 
+
 
     data = {}
 
-    if(userPassword === userPasswordRepeat && userPassword !== "" && userPasswordRepeat !== "" ){
-        data.password = userPassword
-        console.log(userPassword)
-        console.log(typeof(userPassword))
-        console.log(userPasswordRepeat)
-        console.log(typeof(userPasswordRepeat))
-    }else{
-        
+    data.editedUserId = datauser._id
+
+    data.password = (userPassword.value && userPasswordRepeat.value)
+
+    if (data.password === '') {
+        delete data.password
     }
 
-    if(userFullName !== datauser.fullname){
-        data.fullname = userFullName 
+
+    if (userFullName.value !== datauser.fullname) {
+        data.fullname = userFullName.value
     }
-    if(userEmailForm !== datauser.email){
-        data.email = userEmailForm
+    if (userEmailForm.value !== datauser.email) {
+        data.email = userEmailForm.value
     }
 
-    console.log(data)
+
+
+
+    if (Object.keys(data).toString() === "editedUserId"){
+        console.log('only id ___---___ No Request ')
+        closeModal('editDataModal' + (parseInt(dataIndex) + 1))
+        return;
+    }
+
     
-
-
     $.ajax({
-        type: "POST",
-        url: "/api/editusers",
+        type: "PUT",
+        url: "/api/edituser",
         data: data,
         success: (result) => {
             
+            if(result.nModified === result.ok){
+                console.log("Succesfuly Edited Data at Index "+(dataIndex+1))
+            }else{
+                console.error("Error!!  ",result)
+            }
+            ReqUser()
+            closeModal('editDataModal' + (parseInt(dataIndex) + 1))
+
+
         }
     })
 }
 
+function verifyRequest(dataIndex){
+
+    datauser = requserResult.docs[dataIndex]
+
+
+    data = {}
+
+    data.verifiedUserId = datauser._id
+
+
+
+    console.log(datauser)
+
+    $.ajax({
+        type: "PUT",
+        url: "/api/verifyuser",
+        data: data,
+        success: (result) => {
+            
+            if(result.nModified === result.ok){
+                console.log("Succesfuly Verified Data at Index "+(dataIndex+1))
+            }else{
+                console.error("Error!! ",result)
+            }
+            
+            ReqUser()
+            closeModal('editDataModal' + (parseInt(dataIndex) + 1))
+
+
+        }
+    }
+    )
+}
 
 function deleteData(dataIndex) {
-    showModal('viewDataModal' + (parseInt(dataIndex) + 1), 'viewDataModal' + dataIndex, 'modal-lg', '#' + (parseInt(dataIndex) + 1) + '\' delete.',
-        `
+    showModal('deleteDataModal' + (parseInt(dataIndex) + 1), 'viewDataModal' + dataIndex, 'modal-lg', '#' + (parseInt(dataIndex) + 1) + '\' delete.',
+    `
     Emin misin gardaşım
     `, `<button type="button" class="btn btn-primary" onclick="deleteDataFromDB('` + dataIndex + `')" data-dismiss="modal">evt</button>`)
 }
 
 function deleteDataFromDB(dataIndex) {
 
-    const data = requserResult.docs[dataIndex]
+    const data = {}
+    data.deletedUserId  = requserResult.docs[dataIndex]._id
 
+    $.ajax({
+        type: "DELETE",
+        url: "/api/deluser",
+        data: data,
+        success: (result) => {
+            
+            if(result.nModified === result.ok){
+                console.log("Succesfuly deleted Data at Index "+(dataIndex+1))
+            }else{
+                console.error("Error!!  ",result)
+            }
+            ReqUser()
+            closeModal('deleteDataModal' + (parseInt(dataIndex) + 1))
+            
+
+        }
+    })
 
 
 

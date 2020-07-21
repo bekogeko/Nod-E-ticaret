@@ -25,7 +25,7 @@ function initialize(passport){
             //  kullanicinin dogrulanmasi icin karsilastirilacak veri ,veri tabanindan alinacak. filtre olarak
             //  email ozelligini ayirt edici ozellik olarak bize verilen username ile karsilastirilip   
             //  sonucu (err,user)fonksiyonuna veriyoruz
-            userModel.findOne({ email: username,isVerified:true },function (err, user) {
+            userModel.findOne({ email: username },function (err, user) {
 
                 //eger veritabanindaki islemde hata varsa
                 if (err) {
@@ -37,9 +37,13 @@ function initialize(passport){
                 if (!user) {
                     //yazilimsal hata yok, kullanici yok,ozellikler{mesaj :'hatali kullanici adi'}
                     //diye dondur
-                    return done(null, false, { message: 'Incorrect username Or not Verified Yet.' });
+                    return done(null, false, { message: 'Incorrect Username' });
                 }
                 //buradan sonrasinda user tanimli yani bulunmus
+
+                if(!user.isVerified){
+                    return done(null,false,{message:"Not Verified Yet"})
+                }
 
                 //bcrypt'de bize verilen(kullanicinin girdigi) ile veritabanindaki sifrelenmis sifreyi 
                 //kontrol edip (err,result) metoduna veriyoruz

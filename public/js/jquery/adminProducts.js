@@ -61,13 +61,14 @@ function ReqUser() {
                     <tr>`
                     );
 
-                    $('#productsTableShowInfo').html(
-                        `
-                        Showing <b>`+ productResult.docs.length + `</b> out of <b>` + productResult.AlldocCount + `</b> entries
-                        `
-                    )
+                    
 
                 }
+                $('#productsTableShowInfo').html(
+                    `
+                    Showing <b>`+ productResult.docs.length + `</b> out of <b>` + productResult.AlldocCount + `</b> entries
+                    `
+                )
 
             }
         });
@@ -84,7 +85,6 @@ function copyToClipboard(text) {
     tempInput.value = text;
     document.body.appendChild(tempInput);
     tempInput.select();
-    alert('Color hex code copied to clipboard!');
     document.execCommand("copy");
     document.body.removeChild(tempInput);
     
@@ -107,22 +107,13 @@ function viewData(dataIndex) {
         }else{
             imgHTML = 'No Image'
         }
-        urunPhotosHTML +=  '<a onclick="copyToClipboard(\'#' + element.colorHEX + '\')"><span class="dot" aria-hidden="true" style="background-color:#' + element.colorHEX + ';" data-toggle="tooltip" data-placement="top" title="'+ element.colorName+' #'+element.colorHEX+' (click to copy)"></span></a>'
+        urunPhotosHTML +=  `
+        <a onclick="copyToClipboard(\'#` + element.colorHEX + `\')">
+            <span class="dot" aria-hidden="true" style="background-color:#` + element.colorHEX + `;"
+             data-toggle="tooltip" data-placement="top" title="`+ element.colorName+` #`+element.colorHEX+` (click to copy)">
+            </span>
+        </a>`
 
-
-        /*`
-        <div class="row">
-            <div class="col">
-                <p>`+imgHTML+`</p>
-            </div>
-            <div class="col">
-                <p>`+element.colorHEX+`</p>
-            </div>
-            <div class="col">
-                <p>`+element.colorName+`</p>
-            </div>
-        </div>
-        `*/
     }
     urunPhotosHTML += '</div>'
 
@@ -173,15 +164,6 @@ function deleteDataFromDB(dataIndex) {
     console.log(data)
     ReqUser()
 }
-
-
-function addProductModal() {
-
-    showModal('addProductModal', 'addProductModalTitle', 'modal-lg', 'Add Product', ``, ``)
-
-
-}
-
 
 
 

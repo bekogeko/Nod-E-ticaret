@@ -7,10 +7,11 @@ router.get('/products',IsAdmin, controller.productsGET)
 router.get('/addproducts',IsAdmin, controller.productsAddGET)
 
 router.get('/requsers',IsAdmin, controller.requsersGET)
-router.get('/delusers',IsAdmin, controller.delusersGET)
-router.get('/updateusers',IsAdmin, controller.updateusersGET)
 
-router.post('/edituser',IsAdmin,controller.editusersPOST)
+router.delete('/deluser',IsAdmin, controller.deluserDELETE)
+
+router.put('/verifyuser',IsAdmin, controller.verifyuserPUT)
+router.put('/edituser',IsAdmin,controller.editusersPUT)
 
 
 
