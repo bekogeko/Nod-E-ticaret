@@ -189,9 +189,9 @@ function editRequest(dataIndex) {
 
 
     if(!(userEmailForm.checkValidity()&&
-       userFullName.checkValidity()&&
-       userPassword.checkValidity()&&
-       userPasswordRepeat.checkValidity()) ){
+        userFullName.checkValidity()&&
+        userPassword.checkValidity()&&
+        userPasswordRepeat.checkValidity()) ){
            
         userEmailForm.reportValidity()
         userFullName.reportValidity()

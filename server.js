@@ -17,9 +17,15 @@ const registerRoute = require('./routers/registerRoute')
 const apiRoute = require('./routers/apiRoute')
 const logoutRoute = require('./routers/logoutRoute.js')
 
+
 mongooseSetup.init()
 
 initializePassport(passport)
+
+
+
+
+
 
 app.set('view-engine', 'ejs')
 app.use(express.static('./public'))

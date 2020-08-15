@@ -4,7 +4,8 @@ const controller = require('../controllers/apiCont')
 const { IsAdmin } = require('../middleware/Auth')
 
 router.get('/products',IsAdmin, controller.productsGET)
-router.get('/addproducts',IsAdmin, controller.productsAddGET)
+router.post('/products',IsAdmin, controller.productsPOST)
+router.get('/categories',IsAdmin, controller.categoriesGET)
 
 router.get('/requsers',IsAdmin, controller.requsersGET)
 
