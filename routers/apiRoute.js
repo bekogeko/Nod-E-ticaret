@@ -3,8 +3,7 @@ const router = express.Router()
 const controller = require('../controllers/apiCont')
 const { IsAdmin } = require('../middleware/Auth')
 
-router.get('/products',IsAdmin, controller.productsGET)
-router.post('/products',IsAdmin, controller.productsPOST)
+
 router.get('/categories',IsAdmin, controller.categoriesGET)
 
 router.get('/requsers',IsAdmin, controller.requsersGET)
@@ -16,6 +15,9 @@ router.put('/edituser',IsAdmin,controller.editusersPUT)
 
 
 
+router.get('/products',IsAdmin, controller.productsGET)
+router.post('/products',IsAdmin, controller.productsPOST)
+router.delete('/products',IsAdmin, controller.productsDELETE)
 
 
 

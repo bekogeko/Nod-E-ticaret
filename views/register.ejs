@@ -1,12 +1,80 @@
 <html>
     <head>
         <script src="/js/register.js"></script>
-    
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+        <title>Adasan Admin</title>
+
+
+
+        <link rel="stylesheet" href="../../assets/font-awesome/css/all.css">
+        <link rel="stylesheet" href="../../assets/bootstrap/css/bootstrap.min.css">
+
+        <script src="../../assets/js/jquery.min.js"></script>
+        <script src="../../assets/bootstrap/js/bootstrap.min.js"></script>
+
+
+
+        <link rel="stylesheet" href="../../assets/css/adminMain.css">
+        <script src="../../js/jquery/adminProducts.js"></script>
 
     </head>
-    <body>
+    <body style="background-color: #d7d7d7">
+        <div style="display: block;
+        margin-left: 25%;
+        margin-right: 25%;
+        margin-top:10%;
+        border-radius: 5%;
+        background-color: white">
+            <h1 class="display-4" style="text-align: center;display:block; padding-top: 3%; "> Register </h1>
+
+            <form method="POST" action="/register" style="margin-left: 10%; margin-top: 7%; width: 80%;">            
+                <div class="input-group" style="margin-bottom:2%">
+                    <div class="input-group-prepend">
+                        <span aria-placeholder="Full Name" class="input-group-text" id="" style="margin-right: 10%; border-color: #009432; border:1.3px solid; background-color: transparent;color: #009432;">Full Name</span>
+                    </div>
+                    <input type="text" style="border-left-color: #009432;" name="name" required class="form-control">
+                </div>
+
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="inputGroup-sizing-default" style="margin-right: 10%; border-color: #009432; border:1.3px solid; background-color: transparent;color: #009432;" aria-placeholder="Email"> Email </span>
+                    </div>
+                    <input type="email" class="form-control" aria-label="Email" name="email"  required style="border-left-color: #009432;" aria-describedby="inputGroup-sizing-default">
+                </div>
+
+                <div class="input-group mb-3">
+                    <input type="password" class="form-control" placeholder="Password"  required  aria-label="Password" minlength="0" onchange="passwordLimitation()" id='password' name="password" aria-describedby="basic-addon2">
+                    <div>
+                        <button class="input-group-append h-100 btn btn-outline-success"  type="button" onclick="showPassword('password')" style="margin-left: 7%;"><i class="fas fa-eye" style="align-self:center"></i></button>
+                    </div>
+                </div>
+
+                <div class="input-group mb-3">
+                    <input type="password" class="form-control"  required placeholder="Password Repeat" aria-label="Password Repeat" minlength="0" onchange="passwordLimitation()" id='passwordRepeat' name="passwordRepeat" aria-describedby="basic-addon2">
+                    <div>
+                        <button class="input-group-append h-100 btn btn-outline-success" type="button" onclick="showPassword('passwordRepeat')" style="margin-left: 7%;"><i class="fas fa-eye" style="align-self:center"></i></button>
+                    </div>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" required id="defaultCheck1">
+                    <label class="form-check-label" for="defaultCheck1"><strong>
+                        Okudum Kabul Ediyom Ya
+                        </strong>
+                    </label>
+                </div>
+                <button type="submit" class="btn btn-success" style="margin-left: 87%; margin-bottom: 5%;">Register</button>
+    
+            </form>
+            
+        </div>
+
+
+
+
+        <!--
         <%if(user) {%>
-            <h1>ne ara kayit oldun aq</h1>
+            <h1></h1>
         <%} else {%>
             <h1>Register Form</h1>
             <form method="POST" action="/register">
@@ -15,7 +83,7 @@
                 <label for="email">E-Posta Adresi</label>
                 <input type="email" name="email"  ><br>
                 <label for="password">Çok Havalı Şifre </label>
-                <input type="password" minlength="0" onchange="passWordLimitation()" id='password' name="password"><br>
+                <input type="password" minlength="0" onchange="passwordLimitation()" id='password' name="password"><br>
                 <label for="passwordRepeat">Çok Havalı Şifre v2</label>
                 <input type="password" minlength="0" name="passwordRepeat"><br>
                 <input type="submit" value="abicim gunun sozunu soyler misiiiinn">
@@ -29,7 +97,7 @@
             <h3>SEN ZATEN VARSIN BROM.</h3>
         <%}%>
         <%if (succes==true) {%>
-            <h3>BAŞARILI AMK.</h3>
-        <%}%>
+            <h3>BAŞARILI.</h3>
+        <%}%>-->
     </body>
 </html>

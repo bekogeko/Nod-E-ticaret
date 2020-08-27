@@ -22,6 +22,9 @@ function IsLoggedIn(req,res,next){
     if(req.isAuthenticated() && req.user !==undefined){
         next()
     }else{
+        console.log(req.isAuthenticated())
+        console.log(req.user)
+        console.log(req.isAuthenticated() && req.user !==undefined)
         res.redirect('/')
     }
 }

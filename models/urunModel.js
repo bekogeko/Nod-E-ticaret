@@ -4,7 +4,11 @@ var Schema = mongoose.Schema;
 var urunSchema = new Schema({
     urunType:{type: Number, required:true},
     urunName:{type: String,required: true,unique: true},
-    urunPhotos:{type: [{colorHEX:String,coloredProductPath:String,colorName:String}] ,required:true   }
+    urunPhotos:{type: [{
+        colorHEX:String,
+        coloredShowcasePath:String,
+        coloredPreviewPath:String,
+        colorName:String}]      ,required:true   }
    // urunColors:{type: [{colorName:String,colorPath:String,colorHEX:String}],required:true}
 })
 

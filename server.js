@@ -16,15 +16,13 @@ const indexRoute = require('./routers/indexRoute')
 const registerRoute = require('./routers/registerRoute')
 const apiRoute = require('./routers/apiRoute')
 const logoutRoute = require('./routers/logoutRoute.js')
+const productRoute = require('./routers/productRoute.js')
+const categoryRoute = require('./routers/categoryRoute.js')
 
 
 mongooseSetup.init()
 
 initializePassport(passport)
-
-
-
-
 
 
 app.set('view-engine', 'ejs')
@@ -48,7 +46,7 @@ app.use(session({
 //sifre giris sistemini init ediyoruz
 app.use(passport.initialize())
 
-//
+
 app.use(passport.session())
 
 
@@ -60,7 +58,8 @@ app.use('/', indexRoute)
 app.use('/register', registerRoute)
 app.use('/api',apiRoute)
 app.use('/logout',logoutRoute)
-
+app.use('/product',productRoute)
+app.use('/category',categoryRoute)
 
 
 app.all('*',(req,res,next) => {
