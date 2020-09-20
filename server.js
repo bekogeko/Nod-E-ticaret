@@ -19,7 +19,7 @@ const logoutRoute = require('./routers/logoutRoute.js')
 const productRoute = require('./routers/productRoute.js')
 const categoryRoute = require('./routers/categoryRoute.js')
 
-
+//veritabani sistemini init ediyoruz
 mongooseSetup.init()
 
 initializePassport(passport)
@@ -45,8 +45,7 @@ app.use(session({
 }))
 //sifre giris sistemini init ediyoruz
 app.use(passport.initialize())
-
-
+//sifre giris sistemine session yetkisi veriyoruz
 app.use(passport.session())
 
 

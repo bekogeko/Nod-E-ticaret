@@ -9,6 +9,7 @@ router.post('/dashboard',IsAdmin,controller.DashboardPOST)
 router.get('/products',IsAdmin,controller.productsGET)
 router.get('/registerReq',IsAdmin,controller.registerReqGET)
 
+router.get('/categories',IsAdmin,controller.categoriesGET)
 
 
 

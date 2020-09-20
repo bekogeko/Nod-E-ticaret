@@ -2,7 +2,6 @@ const userTableLimit = 2
 var productResult;
 var categoriesResult;
 var apiData = {
-
     urunType: null,
     urunName: null,
     urunPhotos: [],
@@ -14,7 +13,6 @@ var isyVoteBigger
 var viewDataCollapseIsOpen = false
 var editDataCollapseIsOpen = false
 var lastEditDataCollapseDatas = []
-
 
 $(document).ready(ReqUser)
 
@@ -137,9 +135,6 @@ function onColorClick(dataIndex,colorIndex){
         ThumbnailImgUsage.style.opacity = 1;
     });
 
-
-        
-
     if(isyVoteBigger){
         
         ThumbnailImgUsage.style.width = "580px"
@@ -156,15 +151,28 @@ function onColorClick(dataIndex,colorIndex){
 
 function ChangeIconFunc(){
 
-    
-    if(viewDataCollapseIsOpen){
-        viewDataCollapseIsOpen = false;
-        $("#icon").removeClass("far fa-minus-square fa-2x").addClass("far fa-plus-square fa-2x");
-    }
-    else{
-        viewDataCollapseIsOpen = true;
+    if(!viewDataCollapseIsOpen){
         $("#icon").removeClass("far fa-plus-square fa-2x").addClass("far fa-minus-square fa-2x");  
     }
+    else{
+        $("#icon").removeClass("far fa-minus-square fa-2x").addClass("far fa-plus-square fa-2x");
+    }
+
+    $('#ShowImageCollapse').on('hidden.bs.collapse', function () {
+        viewDataCollapseIsOpen = false;
+        //$("#icon").removeClass("far fa-minus-square fa-2x").addClass("far fa-plus-square fa-2x");
+        
+    })
+
+    $('#ShowImageCollapse').on('shown.bs.collapse', function () {
+        viewDataCollapseIsOpen = true;
+        //$("#icon").removeClass("far fa-plus-square fa-2x").addClass("far fa-minus-square fa-2x");  
+    })
+    
+    
+
+
+
 }
 
 function viewData(dataIndex) {
@@ -246,8 +254,8 @@ function viewData(dataIndex) {
         }
         </style>    
         
-        <form class ="bg-light">
-                <div>
+        <form class="bg-light">
+                <div class="text-center">
                     <table class="table table-bordered ">
                         <thead>
                             <tr>
@@ -801,4 +809,3 @@ function closeModal(id, CB) {
     })
     try { CB() } catch { }
 }
-

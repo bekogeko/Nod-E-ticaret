@@ -4,7 +4,6 @@ const urunModel = require('../models/urunModel')
 module.exports.DashboardGET = (req,res,next)=>{    
     res.render('adminDashboard.ejs')
 }
-
 module.exports.DashboardPOST = (req,res,next)=>{}
 
 module.exports.productsGET = (req,res,next)=>{
@@ -15,4 +14,8 @@ module.exports.productsGET = (req,res,next)=>{
 module.exports.registerReqGET = (req,res,next)=>{
 
     res.render('adminUsers.ejs')
+}
+
+module.exports.categoriesGET = (req,res,next)=>{
+    res.render('adminCategories.ejs')
 }
